@@ -1,0 +1,12 @@
+# Site settings
+title: bicpi.de
+email: bicpi@gmx.de
+description: "bicpi.de's blog"
+baseurl: ""
+url: "http://bicpi.de"
+twitter_username: bicpi
+github_username:  bicpi
+
+# Build settings
+markdown: kramdown
+permalink: pretty

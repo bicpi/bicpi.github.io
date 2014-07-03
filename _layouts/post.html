@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<section>
+    <article class="ui segment raised">
+        <h1 class="ui dividing header">
+            <div class="sub header">
+                <a href="http://philipp-rieber.net" target="_blank"><img class="ui image avatar" src="/images/avatar.jpg" /></a>
+                {{ page.date | date: "%b %-d, %Y" }}
+            </div>
+            {{ page.title }}
+        </h1>
+        {{ content }}
+    </article>
+</section>
