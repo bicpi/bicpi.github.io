@@ -29,15 +29,14 @@ Then update your vendors:
 
 Configure the `AmazonS3` class from the AWS SDK as a service. Usually you'll have to pass an options array with the S3 credentials as constructor arguments:
 
-
-
-
-
-        %uploads_s3_key%
-        %uploads_s3_secret%
-
-
-
+    <!-- ... -->
+    <service id="my.storage.s3" class="AmazonS3">
+      <argument type="collection">
+        <argument key="key">%uploads_s3_key%</argument>
+        <argument key="secret">%uploads_s3_secret%</argument>
+      </argument>
+    </service>
+    <!-- ... -->
 
 Add the credentials to your `parameters.yml`:
 
@@ -49,11 +48,10 @@ Add the credentials to your `parameters.yml`:
 
 Now you could grab the service from the container and just use it:
 
-
-
-    $s3 = $this-&gt;container-&gt;get('my.storage.s3');
-    $s3-&gt;create_object('my-bucket-name', 'my-file');
-
+{% highlight php linenos %}
+    $s3 = $this->container->get('my.storage.s3');
+    $s3->create_object('my-bucket-name', 'my-file');
+{% endhighlight %}
 
 As mentioned above we can get rid of this dependency on the S3 service by using Gaufrette. Install the Gaufrette Symfony2 bundle by adding another line to your `composer.json`:
 
@@ -105,19 +103,19 @@ Usage of a filesystem is easy. Just retrieve the desired filesystem from the `kn
 
 
     // Get filesystem map
-    $filesystemMap = $this-&gt;container-&gt;get('knp_gaufrette.filesystem_map');
+    $filesystemMap = $this->container->get('knp_gaufrette.filesystem_map');
 
     // Get filesystem
-    $filesystem = $filesystemMap-&gt;get('uploads');
+    $filesystem = $filesystemMap->get('uploads');
 
     // Write file
-    $filesystem-&gt;write($path, $content);
+    $filesystem->write($path, $content);
 
     // Read file
-    $filesystem-&gt;read($path);
+    $filesystem->read($path);
 
     // Delete file
-    $filesystem-&gt;delete($path);
+    $filesystem->delete($path);
 
 
 But how to define and switch the adapters? This also happens in the container configuration:
@@ -127,15 +125,15 @@ But how to define and switch the adapters? This also happens in the container co
     # ...
     knp_gaufrette:
       adapters:
-    &nbsp; &nbsp; uploads_local:
-    &nbsp; &nbsp; &nbsp; local:
-    &nbsp; &nbsp; &nbsp; &nbsp; directory: %uploads_local_directory%
-    &nbsp; &nbsp; uploads_s3:
-    &nbsp; &nbsp; &nbsp; amazon_s3:
-    &nbsp; &nbsp; &nbsp; &nbsp; amazon_s3_id: my.storage.s3 # Service ID for AmazonS3 class, see above
-    &nbsp; &nbsp; &nbsp; &nbsp; bucket_name: %uploads_s3_bucket_name%
-    &nbsp; &nbsp; &nbsp; &nbsp; options:
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; region: %uploads_s3_region%
+        uploads_local:
+          local:
+            directory: %uploads_local_directory%
+        uploads_s3:
+          amazon_s3:
+            amazon_s3_id: my.storage.s3 # Service ID for AmazonS3 class, see above
+            bucket_name: %uploads_s3_bucket_name%
+            options:
+              region: %uploads_s3_region%
       filesystems:
         # ...
 
