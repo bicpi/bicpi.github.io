@@ -1,11 +1,60 @@
-Finally, after preparing our application during the <a title="Moving to the cloud part 1: Intentions" href="/moving-to-the-cloud-part-1-intentions/">last few months bit by bit</a>, it was time for the last and most important step: move the application code to an autoscaling multi-server environment in the cloud and do a smooth DNS switch for the productive application. First we thought doing this with EC2 directly, but after some investigations we found solutions like Scalr, OpsWorks (the former Scalarium) or Elastic Beanstalk doing the heavy work for us. We decided in favor for <strong>Elastic Beanstalk</strong> - let's see why and how.
+Finally, after preparing our application during the
+[last few months bit by bit]({% post_url 2013-03-09-moving-to-the-cloud-part-1-intentions %}),
+it was time for the last and most important step: move the application code to an
+auto-scaling multi-server environment in the cloud and do a smooth DNS switch for
+the productive application. First we thought doing this with EC2 directly, but
+after some investigations we found solutions like Scalr, OpsWorks (the former
+Scalarium) or Elastic Beanstalk doing the heavy work for us. We decided in favor
+for **Elastic Beanstalk** - let's see why and how.
 
 <!--more-->
 
-The first time I played around with <a href="http://aws.amazon.com/ec2/" target="_blank">Amazon's EC2</a> service some years ago I was completly excited about all the possibilities: Setting up server instances on demand by simple mouse clicks, chosing between different instance types regarding CPU and RAM size for the specific needs of an application, wiring several instances together with a load balancer in front -  and only paying for what's currently in use. Suddenly, even small companies became able to provide highly scalable multi-server environments without buying resources in advance. No financial risk if the application fails. No sysadmin that needs hours or days to configure fresh root servers. Easily extendable setup. No long running contracts. No setup fees.
+The first time I played around with [Amazon's EC2](http://aws.amazon.com/ec2/)
+service some years ago I was completly excited about all the possibilities:
+Setting up server instances on demand by simple mouse clicks, choosing between
+different instance types regarding CPU and RAM size for the specific needs of an
+application, wiring several instances together with a load balancer in front -
+and only paying for what's currently in use. Suddenly, even small companies became
+able to provide highly scalable multi-server environments without buying resources
+in advance. No financial risk if the application fails. No sysadmin that needs
+hours or days to configure fresh root servers. Easily extendable setup. No long
+running contracts. No setup fees.
 
-Mostly, if you find a solution for an issue, you'll get new issues when implementing this solution. Ok, with EC2 you can start whatever server instance type you need at any time. You can do this by a mouse click in the Amazon console or by programmatically using the API. You can create a load balancer and add instances to it. You can add more instances if the load grows, you can terminate instances as soon as you no longer need them. You can SSH onto any instance of your cluster and install packages, application code or cronjobs. This is really great - but you'll want more for a productive application. You'll want the scaling to be triggered automatically by the current load. You'll want all instances to be configured the same. You'll want to roll out new code to all instances in one go. You'll want some cronjobs to be running only on one instance of the cluster that never gets terminated by autoscaling. You'll want to have health checks and monitoring.
+Mostly, if you find a solution for an issue, you'll get new issues when
+implementing this solution. Ok, with EC2 you can start whatever server instance
+type you need at any time. You can do this by a mouse click in the Amazon console
+or by programmatically using the API. You can create a load balancer and add
+instances to it. You can add more instances if the load grows, you can terminate
+instances as soon as you no longer need them. You can SSH onto any instance of
+your cluster and install packages, application code or cronjobs. This is really
+great - but you'll want more for a productive application. You'll want the scaling
+to be triggered automatically by the current load. You'll want all instances to
+be configured the same. You'll want to roll out new code to all instances in one
+go. You'll want some cronjobs to be running only on one instance of the cluster
+that never gets terminated by autoscaling. You'll want to have health checks and
+monitoring.
 
-There are some services on the internet that help you with exactly this kind of issues. In other words, they help you manage your Amazon resources with an abstraction layer on top of the raw Amazon webservices. Those kind of abstration layers are called Platform-as-a-Service (PaaS) - you get all the single services combined to the whole application platform. For instance, you can create named server farms in a nice browser GUI, configure the autoscaling triggers, deploy application code to all instances at once with no downtime etc. Some of them are third party services like <a href="http://www.rightscale.com/" target="_blank">Rightscale</a> or <a href="http://www.scalr.com/" target="_blank">Scalr</a>. You'll need to pay a service fee on top of the Amazon resources you're managing with the service. But Amazon itself also provides two free services fo this puporse in the AWS console: <a href="http://aws.amazon.com/opsworks/" target="_blank">OpsWork</a> (formerly <a href="http://scalarium.com" target="_blank">Scalarium</a>) and <a href="http://aws.amazon.com/elasticbeanstalk/" target="_blank">Elastic Beanstalk</a>. Scalarium was acquired by Amazon in the beginning of 2013 and is the foundation of OpsWorks. It makes heavy use of the configuration management software <a href="http://www.opscode.com/chef/" target="_blank">Chef</a> and can therefore be highly customized. Elastic Beanstalk was the first Amazon PaaS and is less complex. It is using serveral Amazon webservices like EC2, Elastic Load Balancer (ELB), S3 and ties them together with a configuration made by the user.
+There are some services on the internet that help you with exactly this kind of
+issues. In other words, they help you manage your Amazon resources with an
+abstraction layer on top of the raw Amazon webservices. Those kind of abstraction
+layers are called Platform-as-a-Service (PaaS) - you get all the single services
+combined to the whole application platform. For instance, you can create named
+server farms in a nice browser GUI, configure the autoscaling triggers, deploy
+application code to all instances at once with no downtime etc. Some of them are
+third party services like [Rightscale](http://www.rightscale.com/) or
+[Scalr](http://www.scalr.com/). You'll need to pay a service fee on top of the
+Amazon resources you're managing with the service. But Amazon itself also provides
+two free services fo this purpose in the AWS console: [OpsWork](http://aws.amazon.com/opsworks/)
+(formerly [Scalarium](http://scalarium.com)) and [Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/).
+Scalarium was acquired by Amazon in the beginning of 2013 and is the foundation
+of OpsWorks. It makes heavy use of the configuration management software
+[Chef](http://www.opscode.com/chef/) and can therefore be highly customized. 
+Elastic Beanstalk was the first Amazon PaaS and is less complex. It is using
+several Amazon webservices like EC2, Elastic Load Balancer (ELB), S3 and ties them
+together with a configuration made by the user.
 
-OpsWorks will probably be the tool of choice for our next cloud migration. But when we started our migration it was freshly released and at first glance Chef cookbooks are not your best friends. So for this time, we put our trust in the fully established and well documented Elastic Beanstalk service which is free of charge.
+OpsWorks will probably be the tool of choice for our next cloud migration. But
+when we started our migration it was freshly released and at first glance Chef
+cookbooks are not your best friends. So for this time, we put our trust in the
+fully established and well documented Elastic Beanstalk service which is free
+of charge.
