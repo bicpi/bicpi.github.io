@@ -26,7 +26,7 @@ nameserver records to Amazon's nameservers. Go to the [Route 53 console](https:/
 create a new hosted zone, enter the domain name and save. After saving, the console
 lists the names of four Amazon nameservers.
 
-![Route53-1]({{ site.url }}/assets/route53-1-300x104.png)
+[![Route53-1]({{ site.url }}/assets/route53-1-300x104.png)]({{ site.url }}/assets/route53-1.png)
 
 You, your registrar or your client's registrar will have to update your domain NS
 records with these nameservers. In our case we had to ask our client's registrar
@@ -36,9 +36,9 @@ otherwise our application would not be accessible any more. Having our applicati
 running at `myapp.onemedia.de` and the code be hosted at `192.51.100.234` we would
 just have to create an appropriate A record:
 
-![Route53-2]({{ site.url }}/assets/route53-2-300x126.png)
+[![Route53-2]({{ site.url }}/assets/route53-2-300x126.png)]({{ site.url }}/assets/route53-2.png)
 
-![Route53-3]({{ site.url }}/assets/route53-3-300x70.png)
+[![Route53-3]({{ site.url }}/assets/route53-3-300x70.png)]({{ site.url }}/assets/route53-3.png)
 
 Now we have some kind of shadow configuration, i.e. we've created a clone of the
 existing live DNS configuration which is not yet in use. So we are prepared to

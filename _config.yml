@@ -1,9 +1,9 @@
 # Site settings
-title: bicpi.de
-email: bicpi@gmx.de
-description: "bicpi.de's blog"
+title: Blog | Philipp Rieber
+email: p.rieber@gmail.com
+description: "Philipp Rieber's blog"
 baseurl: ""
-url: "http://bicpi.de"
+url: "http://blog.philipp-rieber.net"
 twitter_username: bicpi
 github_username:  bicpi
 
