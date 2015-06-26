@@ -5,7 +5,7 @@ date:   2013-03-18 08:33:17
 categories: cloud aws route53 dns
 ---
 
-This is part 3 of [my series of articles]({% post-url 2013-03-09-moving-to-the-cloud-part-1-intentions %})
+This is part 3 of [my series of articles]({% post_url 2013-03-09-moving-to-the-cloud-part-1-intentions %})
 about our first application move to the Amazon Cloud. As we are not the owner
 of the productive domain of the application, all communication about DNS changes
 has always been quite tedious, time consuming and prone to errors in the past –
