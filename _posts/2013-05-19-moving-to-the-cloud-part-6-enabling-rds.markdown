@@ -61,14 +61,14 @@ We then just need to copy the endpoint URL and the credentials chosen during the
 Performance
 It is possible to use an RDS instance from outside the AWS ecosystem, for instance from your existing non-AWS server. This is very useful for testing or development purposes but you don't want to do that in production. Connecting a database over the internet is just too slow. But as soon as our production move to EC2 or Elastic Beanstalk is complete we'll also switch the database to RDS.
 
-[1]: http://devtig.es/moving-to-the-cloud-part-5-enabling-ses/ "Moving to the cloud part 5: Enabling SES"
+[1]: /moving-to-the-cloud-part-5-enabling-ses/ "Moving to the cloud part 5: Enabling SES"
 [2]: http://aws.amazon.com/rds
 [3]: https://console.aws.amazon.com/rds
-[4]: http://devtig.es/wp-content/uploads/2013/03/RDS-1-291x300.png
-[5]: http://devtig.es/wp-content/uploads/2013/03/RDS-2-300x222.png
-[6]: http://devtig.es/wp-content/uploads/2013/03/RDS-3-300x208.png
-[7]: http://devtig.es/wp-content/uploads/2013/03/RDS-3.png
-[8]: http://devtig.es/wp-content/uploads/2013/03/RDS-3a-300x172.png
-[9]: http://devtig.es/wp-content/uploads/2013/03/RDS-4-300x161.png
-[10]: http://devtig.es/wp-content/uploads/2013/03/RDS-5-291x300.png
-[11]: http://devtig.es/wp-content/uploads/2013/03/RDS-6-300x142.png
+[4]: /wp-content/uploads/2013/03/RDS-1-291x300.png
+[5]: /wp-content/uploads/2013/03/RDS-2-300x222.png
+[6]: /wp-content/uploads/2013/03/RDS-3-300x208.png
+[7]: /wp-content/uploads/2013/03/RDS-3.png
+[8]: /wp-content/uploads/2013/03/RDS-3a-300x172.png
+[9]: /wp-content/uploads/2013/03/RDS-4-300x161.png
+[10]: /wp-content/uploads/2013/03/RDS-5-291x300.png
+[11]: /wp-content/uploads/2013/03/RDS-6-300x142.png

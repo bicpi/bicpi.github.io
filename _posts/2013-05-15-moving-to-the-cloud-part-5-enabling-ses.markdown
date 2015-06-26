@@ -7,7 +7,7 @@ categories: cloud aws ses email swiftmailer
 
 Sending emails from a Symfony2 application is no challenging task. Just configure the Swiftmailer library with a handful of simple parameters, create a message object, trigger the sending process and you are done. Things change slightly if you are responsible of the mail server at the same time. Setting up and maintaining mail server software may become a challenging task, especially if there are complaints about missing emails, security holes or spam issues. Moreover, sending from a cloud server is not very reliable because of its doubtful IP reputation. &nbsp;Amazon's SES service provides relief.
 
-[Amazon's SES][6]&nbsp;(Simple Email Service) service frees us from setting up and maintaining a mail server by providing an email service with a single SMTP endpoint.
+[Amazon's SES][1]&nbsp;(Simple Email Service) service frees us from setting up and maintaining a mail server by providing an email service with a single SMTP endpoint.
 
 Switching to SES is as simple as updating your Swiftmailer configuration. It should look similar to the following:
 
@@ -24,7 +24,7 @@ Switching to SES is as simple as updating your Swiftmailer configuration. It sho
 
 It should be noted that the `encryption` parameter is not part of the default configuration and no encryption is used by default. Since SES requires TLS encryption we need to add this setting.
 
-If you've signed up for AWS you can find your personal SMTP settings in the&nbsp;[SES Management Console][7]&nbsp;and you can complete your `parameters.yml` with it:
+If you've signed up for AWS you can find your personal SMTP settings in the&nbsp;[SES Management Console][2]&nbsp;and you can complete your `parameters.yml` with it:
 
 
     parameters:
@@ -46,10 +46,5 @@ A fresh SES account runs in a sandbox mode. In the sandbox mode Amazon limits th
 Production mode
 Once you want to switch to production you can request production access from within the SES console. Production mode raises the message limit per day and only requires verified sender addresses. You can also verify a whole domain as a sender domain.
 
-[1]: http://devtig.es/author/bicpi/ "Posts by Philipp Rieber"
-[2]: http://devtig.es/category/amazon-aws/ "View all posts in Amazon (AWS)"
-[3]: http://devtig.es/category/cloud/ "View all posts in Cloud"
-[4]: http://devtig.es/category/swiftmailer/ "View all posts in Swiftmailer"
-[5]: http://devtig.es/category/symfony2/ "View all posts in Symfony2"
-[6]: http://aws.amazon.com/ses
-[7]: https://console.aws.amazon.com/ses
+[1]: http://aws.amazon.com/ses
+[2]: https://console.aws.amazon.com/ses
