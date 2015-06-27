@@ -50,7 +50,6 @@ no big discussion about what could improve our setup:
 * [RDS](http://aws.amazon.com/rds/) (Relational database service) to replace our local database server
 * [EC2](http://aws.amazon.com/ec2/) (Elastic Compute Cloud) to implement an [autoscaling](http://aws.amazon.com/autoscaling/),
  [load balanced](http://aws.amazon.com/elasticloadbalancing/) server farm
-* [CloudWatch](http://aws.amazon.com/cloudwatch/) to implement monitoring
 * At a later date, an extended setup may use [ElastiCache](http://aws.amazon.com/elasticache/)
  (Amazon's [memcached](http://en.wikipedia.org/wiki/Memcached)) and [CloudFront](http://aws.amazon.com/cloudfront/)
  (Amazon's [CDN](http://en.wikipedia.org/wiki/Content_delivery_network)) for increased performance
@@ -80,9 +79,6 @@ number of server instances up and down automatically. As they are all based on t
 template instance, they all share the same configuration. Application code will have to be
 installed on boot time. Deploying new application code will be the trickiest part.
 
-CloudWatch allows us to setup monitoring and to configure notifications to inform us about
-critical incidents in our cloud setup.
-
 ElastiCache may be used at a later point in time to store the sessions. It is a memcached
 compatible key-value store. For now we will move the sessions to the database.
 
@@ -108,7 +104,6 @@ first Symfony2 application to the Amazon cloud:
 5. [Enabling SES]({% post_url 2013-05-15-moving-to-the-cloud-part-5-enabling-ses %})
 6. [Enabling RDS]({% post_url 2013-05-19-moving-to-the-cloud-part-6-enabling-rds %})
 7. Enabling EC2 Elastic Beanstalk
-8. Enabling CloudWatch
 
 While having gained a lot of AWS knowledge by reading all the documentation and implementing
 a lot of proof of concepts we still wanted to be on the safe side before switching to production.
