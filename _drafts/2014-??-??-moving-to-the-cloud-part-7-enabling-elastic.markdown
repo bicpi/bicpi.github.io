@@ -10,7 +10,7 @@ for **Elastic Beanstalk** - let's see why and how.
 <!--more-->
 
 The first time I played around with [Amazon's EC2](http://aws.amazon.com/ec2/)
-service some years ago I was completly excited about all the possibilities:
+service some years ago I was completely excited about all the possibilities:
 Setting up server instances on demand by simple mouse clicks, choosing between
 different instance types regarding CPU and RAM size for the specific needs of an
 application, wiring several instances together with a load balancer in front -
