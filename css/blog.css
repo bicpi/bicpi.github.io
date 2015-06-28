@@ -3,7 +3,9 @@
  */
 
 body {
-    font-family: Georgia, "Times New Roman", Times, serif;
+    /*font-family: Georgia, "Times New Roman", Times, serif;*/
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    /*color: #222222;*/
     color: #555;
 }
 
@@ -169,11 +171,6 @@ h6, .h6 {
 /*
  * Custom
  */
-
-body {
-    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    color: #222222;
-}
 
 a:hover {
     text-decoration: none;
