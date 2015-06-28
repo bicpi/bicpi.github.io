@@ -33,7 +33,7 @@ mentioned in the introduction?
 We just click on Launch a DB instance in the AWS console and choose our
 prefered database provider: MySQL
 
-[![RDS-1]({{ site.baseurl }}/assets/aws/RDS-1-291x300.png)]({{ site.baseurl }}/assets/aws/RDS-1.png)
+![RDS-1]({{ site.baseurl }}/assets/aws/RDS-1.png){: .img-responsive }
 
 In the next dialog we choose from different options:
 
@@ -46,7 +46,7 @@ In the next dialog we choose from different options:
 * Allow automatic minor version updates, e.g. from 5.5.27 to 5.5.28
 * Choose identifier and credentials
 
-[![RDS-2]({{ site.baseurl }}/assets/aws/RDS-2-300x222.png)]({{ site.baseurl }}/assets/aws/RDS-2.png)
+![RDS-2]({{ site.baseurl }}/assets/aws/RDS-2.png){: .img-responsive }
 
 This frees us from setting up the database server itself, from dealing with
 replication and from applying patch level updates every few weeks.
@@ -58,9 +58,9 @@ addresses or subnets. For instance, we can restrict RDS instance access to a
 specific EC2 instance or our company's static IP address. Security groups have to be
 setup separately in the RDS console as shown on the second screenshot.
 
-[![RDS-3]({{ site.baseurl }}/assets/aws/RDS-3-300x208.png)]({{ site.baseurl }}/assets/aws/RDS-3.png)
+![RDS-3]({{ site.baseurl }}/assets/aws/RDS-3.png){: .img-responsive }
 
-[![RDS-3a]({{ site.baseurl }}/assets/aws/RDS-3a-300x172.png)]({{ site.baseurl }}/assets/aws/RDS-3a.png)
+![RDS-3a]({{ site.baseurl }}/assets/aws/RDS-3a.png){: .img-responsive }
 
 This frees us from digging to deep into security concerns.
 
@@ -68,17 +68,17 @@ In the next step we can define the backup retention period up to 35 days. RDS al
 to restore the database to any second during the backup retention period (up to the
 last five minutes).
 
-[![RDS-4]({{ site.baseurl }}/assets/aws/RDS-4-300x161.png)]({{ site.baseurl }}/assets/aws/RDS-4.png)
+![RDS-4]({{ site.baseurl }}/assets/aws/RDS-4.png){: .img-responsive }
 
 This frees us completely from setting up, maintaining and monitoring database backups.
 
 In the last step we can verify all settings and then finally launch the database instance.
 
-[![RDS-5]({{ site.baseurl }}/assets/aws/RDS-5-291x300.png)]({{ site.baseurl }}/assets/aws/RDS-5.png)
+![RDS-5]({{ site.baseurl }}/assets/aws/RDS-5.png){: .img-responsive }
 
 The new database instance will be available a few minutes later.
 
-[![RDS-6]({{ site.baseurl }}/assets/aws/RDS-6-300x142.png)]({{ site.baseurl }}/assets/aws/RDS-6.png)
+![RDS-6]({{ site.baseurl }}/assets/aws/RDS-6.png){: .img-responsive }
 
 We then just need to copy the endpoint URL and the credentials chosen during the setup
 process to our `parameters.yml` and the application is ready to establish a connection

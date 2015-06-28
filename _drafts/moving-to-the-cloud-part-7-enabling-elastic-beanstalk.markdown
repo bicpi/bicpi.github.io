@@ -76,32 +76,32 @@ To create your first PaaS application, login to the
 At first, adjust the appropriate region for your needs, then click on *Create New
 Application*. Enter a name and description for your application:
 
-[![EB-1]({{ site.baseurl }}/assets/aws/eb-1-300x156.jpg)]({{ site.baseurl }}/assets/aws/eb-1.jpg)
+![EB-1]({{ site.baseurl }}/assets/aws/eb-1.jpg){: .img-responsive }
 
 Then, step-by-step, you will be guided through the process to setup your first
 environment within your application. First, select your solution stack and
 if you wish an autoscaling environment. Actual triggers for autoscaling will be
 setup later.
 
-[![EB-2]({{ site.baseurl }}/assets/aws/eb-2-300x172.jpg)]({{ site.baseurl }}/assets/aws/eb-2.jpg)
+![EB-2]({{ site.baseurl }}/assets/aws/eb-2.jpg){: .img-responsive }
 
 In the third step, you can upload your application code as a ZIP package or, in
 the first instance, opt for a sample application. We'll go with the sample
 application and install a custom application later on:
 
-[![EB-3]({{ site.baseurl }}/assets/aws/eb-3-300x172.jpg)]({{ site.baseurl }}/assets/aws/eb-3.jpg)
+![EB-3]({{ site.baseurl }}/assets/aws/eb-3.jpg){: .img-responsive }
 
 Provide some info for your environment name, an *elasticbeanstalk.com* sub
 domain and a description. Please note that your real application URL is fully
 customizable using [Amazon Route53]({% post_url 2013-03-18-moving-to-the-cloud-part-3-enabling-route-53 %}).
 
-[![EB-4]({{ site.baseurl }}/assets/aws/eb-4-300x172.jpg)]({{ site.baseurl }}/assets/aws/eb-4.jpg)
+![EB-4]({{ site.baseurl }}/assets/aws/eb-4.jpg){: .img-responsive }
 
 We don't need any additional resources at this point, so let's just skip the
 next step. And for the RDS instance, it's more convenient to do the setup
 [manually]({% post_url 2013-05-19-moving-to-the-cloud-part-6-enabling-rds %}).
 
-[![EB-5]({{ site.baseurl }}/assets/aws/eb-5-300x172.jpg)]({{ site.baseurl }}/assets/aws/eb-5.jpg)
+![EB-5]({{ site.baseurl }}/assets/aws/eb-5.jpg){: .img-responsive }
 
 In the configuration details, you can specify the EC2 instance type for your
 environment. Please note: check out the [pricing](http://aws.amazon.com/ec2/pricing/)
@@ -111,51 +111,51 @@ machines and an email address for status notifications. You can also specify
 a health check URL which will is pinged every few minutes to check if you're
 application is still alive.
 
-[![EB-6]({{ site.baseurl }}/assets/aws/eb-6-300x209.jpg)]({{ site.baseurl }}/assets/aws/eb-6.jpg)
+![EB-6]({{ site.baseurl }}/assets/aws/eb-6.jpg){: .img-responsive }
 
 Review all information and finally *Create* your platform:
 
-[![EB-7]({{ site.baseurl }}/assets/aws/eb-7-300x286.jpg)]({{ site.baseurl }}/assets/aws/eb-7.jpg)
+![EB-7]({{ site.baseurl }}/assets/aws/eb-7.jpg){: .img-responsive }
 
 You can follow the launch process of your first application environment by looking at the events
 log. This may take some time to complete.
 
-[![EB-8]({{ site.baseurl }}/assets/aws/eb-8-300x210.jpg)]({{ site.baseurl }}/assets/aws/eb-8.jpg)
+![EB-8]({{ site.baseurl }}/assets/aws/eb-8.jpg){: .img-responsive }
 
 After the creation process has completed you'll see a green checkmark for the
 health status ...
 
-[![EB-10]({{ site.baseurl }}/assets/aws/eb-10-300x212.jpg)]({{ site.baseurl }}/assets/aws/eb-10.jpg)
+![EB-10]({{ site.baseurl }}/assets/aws/eb-10.jpg){: .img-responsive }
 
 ... and you're able to access the sample application by the *elasticbeanstalk.com*
 sub domain you specified before.
 
-[![EB-12]({{ site.baseurl }}/assets/aws/eb-12-300x239.jpg)]({{ site.baseurl }}/assets/aws/eb-12.jpg)
+![EB-12]({{ site.baseurl }}/assets/aws/eb-12.jpg){: .img-responsive }
 
 The EC2 console now contains instances for your new Elastic Beanstalk environment:
 
-[![EB-13]({{ site.baseurl }}/assets/aws/eb-13-300x207.jpg)]({{ site.baseurl }}/assets/aws/eb-13.jpg)
+![EB-13]({{ site.baseurl }}/assets/aws/eb-13.jpg){: .img-responsive }
 
 A load balancer has been set up automatically:
 
-[![EB-14]({{ site.baseurl }}/assets/aws/eb-14-300x207.jpg)]({{ site.baseurl }}/assets/aws/eb-14.jpg)
+![EB-14]({{ site.baseurl }}/assets/aws/eb-14.jpg){: .img-responsive }
 
 And there's also a new security group for your new environment:
 
-[![EB-15]({{ site.baseurl }}/assets/aws/eb-15-300x207.jpg)]({{ site.baseurl }}/assets/aws/eb-15.jpg)
+![EB-15]({{ site.baseurl }}/assets/aws/eb-15.jpg){: .img-responsive }
 
 Looking at you S3 console, you'll notice a fresh S3 bucket named related to your Elastic
 Beanstalk environment.
 
-[![EB-16]({{ site.baseurl }}/assets/aws/eb-16-300x207.jpg)]({{ site.baseurl }}/assets/aws/eb-16.jpg)
+![EB-16]({{ site.baseurl }}/assets/aws/eb-16.jpg){: .img-responsive }
 
 To deploy you custom application, go back to the dashboard of your Elastic Beanstalk
 environment and upload a ZIP package of your application code by clicking on *Upload
 and Deploy*:
 
-[![EB-17]({{ site.baseurl }}/assets/aws/eb-17-300x160.jpg)]({{ site.baseurl }}/assets/aws/eb-17.jpg)
+![EB-17]({{ site.baseurl }}/assets/aws/eb-17.jpg){: .img-responsive }
 
 Again, you can follow the environment update by looking at the recent events:
 
-[![EB-18]({{ site.baseurl }}/assets/aws/eb-18-300x153.jpg)]({{ site.baseurl }}/assets/aws/eb-18.jpg)
+![EB-18]({{ site.baseurl }}/assets/aws/eb-18.jpg){: .img-responsive }
 

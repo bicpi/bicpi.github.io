@@ -2,18 +2,11 @@
 layout: default
 ---
 
-<section>
-    {% for post in site.posts %}
-        <article class="ui segment raised">
-            <h1 class="ui dividing header">
-                <div class="sub header">
-                    <a href="http://philipp-rieber.net" target="_blank"><img class="ui image avatar" src="images/avatar.jpg" /></a>
-                    {{ post.date | date: "%b %-d, %Y" }}
-                </div>
-                <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-            </h1>
-            {{ post.excerpt }}
-            <p><a href="{{ post.url | prepend: site.baseurl }}">Read more.</a></p>
-        </article>
-    {% endfor %}
-</section>
+{% for post in site.posts %}
+    <div class="blog-post">
+        <h2 class="blog-post-title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+        <p class="blog-post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
+        {{ post.excerpt }}
+        <p><a href="{{ post.url | prepend: site.baseurl }}">Read more.</a></p>
+    </div>
+{% endfor %}

@@ -3,20 +3,14 @@ layout: default
 comments: true
 ---
 
-<section>
-    <article class="ui segment raised">
-        <h1 class="ui dividing header">
-            <div class="sub header">
-                <a href="http://philipp-rieber.net" target="_blank"><img class="ui image avatar" src="/images/avatar.jpg" /></a>
-                {{ page.date | date: "%b %-d, %Y" }}
-            </div>
-            {{ page.title }}
-        </h1>
-        {{ content }}
-    </article>
+<div class="blog-post">
+    <h2 class="blog-post-title">{{ page.title }}</h2>
+    <p class="blog-post-meta">{{ page.date | date: "%b %-d, %Y" }}</p>
+    {{ content }}
 
+    <p>&nbsp;</p>
     <p><i>Liked this post? Follow me on <a href="https://twitter.com/bicpi" target="_blank">Twitter</a> for updates.</i></p>
-</section>
+</div>
 
 {% if page.comments %}
 <div id="disqus_thread"></div>
