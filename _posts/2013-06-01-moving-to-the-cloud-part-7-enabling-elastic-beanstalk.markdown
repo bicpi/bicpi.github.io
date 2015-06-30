@@ -80,25 +80,26 @@ Application*. Enter a name and description for your application:
 
 Then, step-by-step, you will be guided through the process to setup your first
 environment within your application. First, select your solution stack and
-if you wish an autoscaling environment. Actual triggers for autoscaling will be
-setup later.
+if you wish an autoscaling environment. Actual triggers for autoscaling – like
+CPU or RAM usage – will be setup later.
 
 ![EB-2]({{ site.baseurl }}/assets/aws/eb-2.jpg){: .img-responsive }
 
-In the third step, you can upload your application code as a ZIP package or, in
-the first instance, opt for a sample application. We'll go with the sample
+In the third step, you can upload your application code as a ZIP package or,
+in the first instance, opt for a sample application. We'll go with the sample
 application and install a custom application later on:
 
 ![EB-3]({{ site.baseurl }}/assets/aws/eb-3.jpg){: .img-responsive }
 
-Provide some info for your environment name, an *elasticbeanstalk.com* sub
-domain and a description. Please note that your real application URL is fully
-customizable using [Amazon Route53]({% post_url 2013-03-18-moving-to-the-cloud-part-3-enabling-route-53 %}).
+Provide some info for your environment name, an unique `elasticbeanstalk.com` sub
+domain, e.g. `foobar.elasticbeanstalk.com. and a description. Please note that
+your real application URL is fully customizable using
+[Amazon Route53]({% post_url 2013-03-18-moving-to-the-cloud-part-3-enabling-route-53 %}).
 
 ![EB-4]({{ site.baseurl }}/assets/aws/eb-4.jpg){: .img-responsive }
 
 We don't need any additional resources at this point, so let's just skip the
-next step. And for the RDS instance, it's more convenient to do the setup
+next step. Regarding the RDS instance, it's even more convenient to do the setup
 [manually]({% post_url 2013-05-19-moving-to-the-cloud-part-6-enabling-rds %}).
 
 ![EB-5]({{ site.baseurl }}/assets/aws/eb-5.jpg){: .img-responsive }
@@ -106,10 +107,11 @@ next step. And for the RDS instance, it's more convenient to do the setup
 In the configuration details, you can specify the EC2 instance type for your
 environment. Please note: check out the [pricing](http://aws.amazon.com/ec2/pricing/)
 before selecting an instance type. Powerful instance types can get *real*
-expensive. Besides, give an EC2 keypair so you can SSH into the managed EC2
-machines and an email address for status notifications. You can also specify
-a health check URL which will is pinged every few minutes to check if you're
-application is still alive.
+expensive, so you should go with a **micro** instance first. Besides, give
+an EC2 keypair so you can SSH into the managed EC2 machines and an email
+address for status notifications. You can also specify a health check URL
+within your application which will is pinged every few minutes to check if
+your application is still alive.
 
 ![EB-6]({{ site.baseurl }}/assets/aws/eb-6.jpg){: .img-responsive }
 
@@ -117,22 +119,23 @@ Review all information and finally *Create* your platform:
 
 ![EB-7]({{ site.baseurl }}/assets/aws/eb-7.jpg){: .img-responsive }
 
-You can follow the launch process of your first application environment by looking at the events
-log. This may take some time to complete.
+You can follow the launch process of your first application environment by
+looking at the events log. This may take some time to complete.
 
 ![EB-8]({{ site.baseurl }}/assets/aws/eb-8.jpg){: .img-responsive }
 
-After the creation process has completed you'll see a green checkmark for the
-health status ...
+After the creation process has completed you'll see a green checkmark for
+the health status ...
 
 ![EB-10]({{ site.baseurl }}/assets/aws/eb-10.jpg){: .img-responsive }
 
 ... and you're able to access the sample application by the *elasticbeanstalk.com*
-sub domain you specified before.
+sub domain you specified before, e.g. *http://foobar.elasticbeanstalk.com*
 
 ![EB-12]({{ site.baseurl }}/assets/aws/eb-12.jpg){: .img-responsive }
 
-The EC2 console now contains instances for your new Elastic Beanstalk environment:
+The EC2 console now contains EC2 instances for your new Elastic Beanstalk
+environment:
 
 ![EB-13]({{ site.baseurl }}/assets/aws/eb-13.jpg){: .img-responsive }
 
@@ -144,14 +147,14 @@ And there's also a new security group for your new environment:
 
 ![EB-15]({{ site.baseurl }}/assets/aws/eb-15.jpg){: .img-responsive }
 
-Looking at you S3 console, you'll notice a fresh S3 bucket named related to your Elastic
-Beanstalk environment.
+Looking at your S3 console, you'll notice a fresh S3 bucket named
+related to your Elastic Beanstalk environment:
 
 ![EB-16]({{ site.baseurl }}/assets/aws/eb-16.jpg){: .img-responsive }
 
-To deploy you custom application, go back to the dashboard of your Elastic Beanstalk
-environment and upload a ZIP package of your application code by clicking on *Upload
-and Deploy*:
+To deploy your custom application, go back to the dashboard of your Elastic
+Beanstalk environment and upload a ZIP package of your application code by
+clicking on *Upload and Deploy*:
 
 ![EB-17]({{ site.baseurl }}/assets/aws/eb-17.jpg){: .img-responsive }
 
@@ -159,3 +162,57 @@ Again, you can follow the environment update by looking at the recent events:
 
 ![EB-18]({{ site.baseurl }}/assets/aws/eb-18.jpg){: .img-responsive }
 
+As soon as the deployment is complete you should be able to access your
+application by entering the chosen sub domain in your browser, e.g.
+`foobar.elasticbeanstalk.com`.
+
+What actually happens during deployment is that a ZIP archive of your
+whole application is uploaded to a dedicated S3 bucket first. Then
+a so-called *application version* is created from your upload and
+a deployment to the Elastic Beanstalk gets triggered. No matter how
+many servers are currently running behind the load balancer in your
+environment, Elastic Beanstalk takes care of the roll-out to all of
+them and switching live.
+
+If your application has specific requirements like additional packages,
+a different document root, specific PHP setting or if you want to add
+custom files (like specific parameters for your database connection),
+it is possible to add `*.config` files inside an `.ebextensions` folder
+of your zipped application code.
+
+Since all Amazon web services can be managed by powerful APIs, you can
+also do a deployment by wiring together some CLI commands in a
+Shell script by using the [AWS Command Line Tools](http://aws.amazon.com/cli)
+(which gives you the `aws` command):
+
+{% highlight bash %}
+# Application name on Elastic Beanstalk
+APP="foobar"
+# Environment name on Elastic Beanstalk
+ENV="staging"
+# S3 bucket name of Elastic Beanstalk application
+BUCKET="elasticbeanstalk-eu-west-1-294798127440"
+
+# Create a unique version string for this release
+VERSION="$ENV-v_`date +%Y-%m-%d_%H-%M-%S`"
+# Zip the application
+zip -r $VERSION.zip /path/to/your/application
+
+# Push zipped application to S3 - this may take a while
+aws --profile $APP s3 cp $VERSION.zip s3://$BUCKET/$VERSION.zip
+# Create application version
+aws --profile $APP elasticbeanstalk create-application-version --application-name $APP --version-label $VERSION --source-bundle S3Bucket=$BUCKET,S3Key=$VERSION.zip
+# Trigger environment update
+aws --profile $APP elasticbeanstalk update-environment --environment-name $ENV --version-label $VERSION
+{% endhighlight %}
+
+
+## Autoscaling
+
+Finally, to enable autoscaling, go to the *Configuration* page of your Elastic Beanstalk
+environment and enter a range of servers you'll want your application to run on. For instance,
+you may want of minimum of 2 servers to be on the safe side, and a maximum of 4 to absorb
+peak loads. You can even setup a timetable for autoscaling – e.g. to prepare for your TV
+commercials – and spread the EC2 instances accross Availability Zones.
+
+![EB-19]({{ site.baseurl }}/assets/aws/eb-19.png){: .img-responsive }

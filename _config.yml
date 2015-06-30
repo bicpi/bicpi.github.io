@@ -6,6 +6,8 @@ baseurl: ""
 url: "http://blog.philipp-rieber.net"
 twitter_username: bicpi
 github_username:  bicpi
+paginate: 5
+paginate_path: "/page/:num/"
 
 # Build settings
 markdown: kramdown

@@ -2,7 +2,7 @@
 layout: default
 ---
 
-{% for post in site.posts %}
+{% for post in paginator.posts %}
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
         <p class="blog-post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
@@ -10,3 +10,15 @@ layout: default
         <p><a href="{{ post.url | prepend: site.baseurl }}">Read more.</a></p>
     </div>
 {% endfor %}
+
+<nav>
+    <ul class="pager">
+        {% if paginator.next_page %}
+            <li class="previous"><a href="{{ paginator.next_page_path }}"><i class="fa fa-caret-left"></i> Older</a></li>
+        {% endif %}
+        {% if paginator.previous_page %}
+            <li class="next"><a href="{{ paginator.previous_page_path }}">Newer <i class="fa fa-caret-right"></i></a></li>
+        {% endif %}
+    </ul>
+    <!--<span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>-->
+</nav>

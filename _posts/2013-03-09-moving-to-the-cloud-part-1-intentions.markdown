@@ -103,7 +103,7 @@ first Symfony2 application to the Amazon cloud:
 4. [Enabling S3]({% post_url 2013-05-11-moving-to-the-cloud-part-4-enabling-s3 %})
 5. [Enabling SES]({% post_url 2013-05-15-moving-to-the-cloud-part-5-enabling-ses %})
 6. [Enabling RDS]({% post_url 2013-05-19-moving-to-the-cloud-part-6-enabling-rds %})
-7. Enabling EC2 Elastic Beanstalk
+7. [Enabling EC2 Elastic Beanstalk]({% post_url 2013-06-01-moving-to-the-cloud-part-7-enabling-elastic-beanstalk %})
 
 While having gained a lot of AWS knowledge by reading all the documentation and implementing
 a lot of proof of concepts we still wanted to be on the safe side before switching to production.
