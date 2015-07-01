@@ -71,6 +71,8 @@ you to have multiple environments, so you can for instance setup a *Staging*
 environment with only a single and cheap EC2 instance and an autoscaling
 *Production* environment using a powerful but expensive EC2 instance type.
 
+## Setup an Elastic Beanstalk application
+
 To create your first PaaS application, login to the
 [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk).
 At first, adjust the appropriate region for your needs, then click on *Create New
@@ -139,20 +141,24 @@ environment:
 
 ![EB-13]({{ site.baseurl }}/assets/aws/eb-13.jpg){: .img-responsive }
 
-A load balancer has been set up automatically:
+A load balancer has been set up automatically in front of your EC2
+instance(s):
 
 ![EB-14]({{ site.baseurl }}/assets/aws/eb-14.jpg){: .img-responsive }
 
-And there's also a new security group for your new environment:
+And there's also a new security group for your new environment, allowing
+access to the web server on port 80 and via SSH on port 22:
 
 ![EB-15]({{ site.baseurl }}/assets/aws/eb-15.jpg){: .img-responsive }
 
 Looking at your S3 console, you'll notice a fresh S3 bucket named
-related to your Elastic Beanstalk environment:
+related to your Elastic Beanstalk environment. This is were new
+release versions of your application code get stored, so they can
+be deployed and also rollbacked easily.
 
 ![EB-16]({{ site.baseurl }}/assets/aws/eb-16.jpg){: .img-responsive }
 
-To deploy your custom application, go back to the dashboard of your Elastic
+To deploy a custom application, go back to the dashboard of your Elastic
 Beanstalk environment and upload a ZIP package of your application code by
 clicking on *Upload and Deploy*:
 
@@ -174,11 +180,75 @@ many servers are currently running behind the load balancer in your
 environment, Elastic Beanstalk takes care of the roll-out to all of
 them and switching live.
 
-If your application has specific requirements like additional packages,
+## Customizing
+
+If your application has specific server requirements like additional packages,
 a different document root, specific PHP setting or if you want to add
-custom files (like specific parameters for your database connection),
-it is possible to add `*.config` files inside an `.ebextensions` folder
-of your zipped application code.
+custom files (e.g. containing specific parameters for your database connection),
+it is possible to include an `/.ebextensions` directory in your zipped application
+code. All files using the extension `*.config` in this directory can be used to specify
+custom configuration. For instance, if you need the `lynx` package installed,
+a `.htaccess` secured area, a custom `paramaters.yml` in a Symfony project, some
+custom `php.ini` settings, a cron job to send out what's in the Swiftmailer
+file spool and set an appropriate timezone for the EC2 instances, you may use a
+configuration like the following:
+
+`/.ebextensions/app.config`:
+
+{% highlight bash %}
+packages:
+  yum:
+    lynx: []
+
+files:
+  "/tmp/htaccess":
+    mode: "644"
+    owner: webapp
+    group: webapp
+    content: |
+      AuthName "My secured area"
+      AuthType Basic
+      AuthUserFile /var/app/current/.htpasswd
+      require user admin
+  "/tmp/parameters.yml":
+    mode: "644"
+    owner: webapp
+    group: webapp
+    content: |
+      parameters:
+        database_driver: pdo_mysql
+        database_host: omdb.vnbnlwvfvi3zc.eu-west-1.rds.amazonaws.com
+        database_port: ~
+        database_name: app
+        database_user: app
+        database_password: JKIAJ97WSC3L9GFZS7P2
+  "/etc/php.d/app.ini":
+    mode: "644"
+    content: |
+      date.timezone = Europe/Berlin
+  "/tmp/app-crons":
+    mode: "644"
+    content: |
+      MAILTO=cron@app.com
+      * * * * * webapp /var/app/current/app/console swiftmailer:spool:send --env=stage > /dev/null 2>&1
+
+commands:
+  10_servertime:
+    command: cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime && echo 'ZONE="Europe/Berlin"' | tee /etc/sysconfig/clock
+
+container_commands:
+  10_parameters:
+    command: mv /tmp/parameters.yml app/config/
+  20_protection:
+    command: 'mv /tmp/htaccess .htaccess && htpasswd -cb .htpasswd admin "B0DEK/TK2k_p0FgPxK1" && chmod 444 .htpasswd'
+  30_crons:
+    command: mv /tmp/app-crons /etc/cron.d/
+{% endhighlight %}
+
+There's lot of [documentation](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers.html)
+how you can customize to your specific needs.
+
+## Setup a deployment script
 
 Since all Amazon web services can be managed by powerful APIs, you can
 also do a deployment by wiring together some CLI commands in a
@@ -206,6 +276,24 @@ aws --profile $APP elasticbeanstalk create-application-version --application-nam
 aws --profile $APP elasticbeanstalk update-environment --environment-name $ENV --version-label $VERSION
 {% endhighlight %}
 
+The remaining question here is how to prepare the application code that gets zipped
+so that it can run properly and secure on the Elastic Beanstalk environment.
+You may need to setup a custom process here, e.g. to get rid of unnecessary files
+like development front controllers or uncompressed asset files. You can do this by
+by extending the shell script or by using build tools like [Ant](http://ant.apache.org/)
+or [Phing](https://www.phing.info/). In the end, what you need to build, is a directory
+with your application code completely stripped down to the bare minimum of what's really
+needed to run the application, maybe compressed assets and likely you need to include
+a configuration file appropriate for your target environment (database settings, API keys etc.
+for this specific environment). For the latter, you may also use environment variables. On
+Elastic Beanstalk, you can set them in the environment configuration and they are available
+on every EC2 instance managed by your environment.
+
+One thing to note is that in a PHP application that uses Composer, you do not have to include
+your `/vendor` directory. Elastic Beanstalk makes some assumption about your application,
+and if there's a `composer.json` in your application root, it automatically does a
+`composer install` during deployment. This will save you a lot of time and bandwidth when
+transmitting your zipped application code.
 
 ## Autoscaling
 
@@ -216,3 +304,11 @@ peak loads. You can even setup a timetable for autoscaling – e.g. to prepare f
 commercials – and spread the EC2 instances accross Availability Zones.
 
 ![EB-19]({{ site.baseurl }}/assets/aws/eb-19.png){: .img-responsive }
+
+## More
+
+There are a lot more features available on Elastic Beanstalk that cannot be covered here.
+You can do for example far more customizations, there are special options for all the different
+platform stacks, zero-downtime deployments, SSL, using custom domains, integration of other
+AWS services etc. Just check out [the extensive documentation](http://docs.aws.amazon.com/elasticbeanstalk)
+for more information.
