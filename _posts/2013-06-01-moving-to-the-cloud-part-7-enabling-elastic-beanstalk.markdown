@@ -94,7 +94,7 @@ application and install a custom application later on:
 ![EB-3]({{ site.baseurl }}/assets/aws/eb-3.jpg){: .img-responsive }
 
 Provide some info for your environment name, an unique `elasticbeanstalk.com` sub
-domain, e.g. `foobar.elasticbeanstalk.com. and a description. Please note that
+domain, e.g. `foobar.elasticbeanstalk.com`, and a description. Please note that
 your real application URL is fully customizable using
 [Amazon Route53]({% post_url 2013-03-18-moving-to-the-cloud-part-3-enabling-route-53 %}).
 
@@ -131,8 +131,8 @@ the health status ...
 
 ![EB-10]({{ site.baseurl }}/assets/aws/eb-10.jpg){: .img-responsive }
 
-... and you're able to access the sample application by the *elasticbeanstalk.com*
-sub domain you specified before, e.g. *http://foobar.elasticbeanstalk.com*
+... and you're able to access the sample application by the `elasticbeanstalk.com`
+sub domain you specified before, e.g. `http://foobar.elasticbeanstalk.com`.
 
 ![EB-12]({{ site.baseurl }}/assets/aws/eb-12.jpg){: .img-responsive }
 
@@ -151,10 +151,10 @@ access to the web server on port 80 and via SSH on port 22:
 
 ![EB-15]({{ site.baseurl }}/assets/aws/eb-15.jpg){: .img-responsive }
 
-Looking at your S3 console, you'll notice a fresh S3 bucket named
-related to your Elastic Beanstalk environment. This is were new
-release versions of your application code get stored, so they can
-be deployed and also rollbacked easily.
+Looking at your S3 console, you'll notice a fresh S3 bucket related to your
+Elastic Beanstalk environment. This is were new release versions of your
+application code get stored, so they can be deployed and also be roll-backed
+easily.
 
 ![EB-16]({{ site.baseurl }}/assets/aws/eb-16.jpg){: .img-responsive }
 
@@ -164,36 +164,35 @@ clicking on *Upload and Deploy*:
 
 ![EB-17]({{ site.baseurl }}/assets/aws/eb-17.jpg){: .img-responsive }
 
-Again, you can follow the environment update by looking at the recent events:
+Again, you can follow the environment update by looking at the *Recent
+Events*:
 
 ![EB-18]({{ site.baseurl }}/assets/aws/eb-18.jpg){: .img-responsive }
 
 As soon as the deployment is complete you should be able to access your
 application by entering the chosen sub domain in your browser, e.g.
-`foobar.elasticbeanstalk.com`.
+`http://foobar.elasticbeanstalk.com`.
 
 What actually happens during deployment is that a ZIP archive of your
 whole application is uploaded to a dedicated S3 bucket first. Then
-a so-called *application version* is created from your upload and
+a so-called *Application Version* is created from your upload and
 a deployment to the Elastic Beanstalk gets triggered. No matter how
 many servers are currently running behind the load balancer in your
 environment, Elastic Beanstalk takes care of the roll-out to all of
-them and switching live.
+them and switching everything live in the end.
 
 ## Customizing
 
-If your application has specific server requirements like additional packages,
-a different document root, specific PHP setting or if you want to add
+If your application has specific server requirements like additional software
+packages, a different document root, specific PHP settings or if you want to add
 custom files (e.g. containing specific parameters for your database connection),
 it is possible to include an `/.ebextensions` directory in your zipped application
 code. All files using the extension `*.config` in this directory can be used to specify
 custom configuration. For instance, if you need the `lynx` package installed,
-a `.htaccess` secured area, a custom `paramaters.yml` in a Symfony project, some
+an `.htaccess` secured area, a custom `parameters.yml` in a Symfony project, some
 custom `php.ini` settings, a cron job to send out what's in the Swiftmailer
 file spool and set an appropriate timezone for the EC2 instances, you may use a
-configuration like the following:
-
-`/.ebextensions/app.config`:
+configuration file `/.ebextensions/app.config` containing this:
 
 {% highlight bash %}
 packages:
@@ -246,14 +245,15 @@ container_commands:
 {% endhighlight %}
 
 There's lot of [documentation](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers.html)
-how you can customize to your specific needs.
+how you can customize to your specific needs and how to execute custom commands during the
+deployment process.
 
 ## Setup a deployment script
 
 Since all Amazon web services can be managed by powerful APIs, you can
 also do a deployment by wiring together some CLI commands in a
-Shell script by using the [AWS Command Line Tools](http://aws.amazon.com/cli)
-(which gives you the `aws` command):
+shell script and by using the [AWS Command Line Tools](http://aws.amazon.com/cli)
+(which give you the `aws` command):
 
 {% highlight bash %}
 # Application name on Elastic Beanstalk
@@ -285,9 +285,10 @@ or [Phing](https://www.phing.info/). In the end, what you need to build, is a di
 with your application code completely stripped down to the bare minimum of what's really
 needed to run the application, maybe compressed assets and likely you need to include
 a configuration file appropriate for your target environment (database settings, API keys etc.
-for this specific environment). For the latter, you may also use environment variables. On
-Elastic Beanstalk, you can set them in the environment configuration and they are available
-on every EC2 instance managed by your environment.
+for this specific environment). For the latter, you may also the custom configuration file
+feature shown above or environment variables. On Elastic Beanstalk, you can set environment
+variables easily in the environment configuration and they are available on every EC2 instance
+managed by your environment.
 
 One thing to note is that in a PHP application that uses Composer, you do not have to include
 your `/vendor` directory. Elastic Beanstalk makes some assumption about your application,
@@ -301,14 +302,15 @@ Finally, to enable autoscaling, go to the *Configuration* page of your Elastic B
 environment and enter a range of servers you'll want your application to run on. For instance,
 you may want of minimum of 2 servers to be on the safe side, and a maximum of 4 to absorb
 peak loads. You can even setup a timetable for autoscaling – e.g. to prepare for your TV
-commercials – and spread the EC2 instances accross Availability Zones.
+commercials – and also spread the EC2 instances across Availability Zones to be independent
+from regional outages etc.
 
 ![EB-19]({{ site.baseurl }}/assets/aws/eb-19.png){: .img-responsive }
 
 ## More
 
-There are a lot more features available on Elastic Beanstalk that cannot be covered here.
+There are a way more features available on Elastic Beanstalk than be covered in this article.
 You can do for example far more customizations, there are special options for all the different
-platform stacks, zero-downtime deployments, SSL, using custom domains, integration of other
+platform stacks, zero-downtime deployments, SSL, usage of custom domains, integration of other
 AWS services etc. Just check out [the extensive documentation](http://docs.aws.amazon.com/elasticbeanstalk)
 for more information.
