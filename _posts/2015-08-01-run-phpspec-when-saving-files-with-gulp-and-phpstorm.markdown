@@ -2,13 +2,7 @@
 layout: post
 title:  "Run phpspec when saving files with gulp and PhpStorm"
 date:   2015-08-01 20:10:19
-categories:
-    - php
-    - phpspec
-    - Gulp
-    - PhpStorm
-    - TDD
-    - Code Kata
+categories: phpspec Gulp PhpStorm TDD
 ---
 
 In our weekly Code Kata at [work](http://www.sessiondigital.de/), we're exercising TDD using
