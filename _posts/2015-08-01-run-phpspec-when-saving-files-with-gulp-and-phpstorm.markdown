@@ -2,7 +2,7 @@
 layout: post
 title:  "Run phpspec when saving files with gulp and PhpStorm"
 date:   2015-08-01 20:10:19
-categories: phpspec Gulp PhpStorm TDD
+categories: phpspec gulp PhpStorm TDD
 ---
 
 In our weekly Code Kata at [work](http://www.sessiondigital.de/), we're exercising TDD using
@@ -21,7 +21,7 @@ spec file was changed in your codebase.
 [Gulp](http://gulpjs.com/) is a [Node.js](https://nodejs.org/) based task runner. It allows you
 to create and run lightweight customized tasks on the command line and provides tons of plugins,
 e.g. for desktop notifications or running `phpspec` with specific options – exactly what we need
-for our purposes. After installing Node.js, Gulp first needs to be installed globally by using
+for our purposes. After installing Node.js, gulp first needs to be installed globally by using
 the Node Package Manager `npm`:
 
 {% highlight bash %}
@@ -29,7 +29,7 @@ $ npm install -g gulp
 {% endhighlight %}
 
 Gulp also needs to be installed locally for each project that makes use of it – just as well as the
-desired Gulp plugins. To install local Node packages, just type a `node install` command right in the
+desired gulp plugins. To install local Node packages, just type a `node install` command right in the
 project's root directory:
 
 {% highlight bash %}
@@ -55,11 +55,11 @@ With `package.json`, you or your fellow teammates just need to run `npm install`
 get the exact same setup of Node module on their machine. Think of it as [Composer](https://getcomposer.org/)
 for Node.
 
-Gulp tasks are defined in a file called `Gulpfile.js` in the project's root directory. First, we import
+Gulp tasks are defined in a file called `gulpfile.js` in the project's root directory. First, we import
 the plugins and assign them to variables:
 
 {% highlight javascript %}
-var gulp = require('gulp'); // Gulp task runner
+var gulp = require('gulp'); // gulp task runner
 var phpspec = require('gulp-phpspec'); // for running phpspec
 var notify = require('gulp-notify'); // for desktop notifications
 {% endhighlight %}
@@ -77,7 +77,7 @@ to the `gulp` command:
 
 {% highlight bash %}
 $ gulp test
-[12:16:25] Using gulpfile ~/test/Gulpfile.js
+[12:16:25] Using gulpfile ~/test/gulpfile.js
 [12:16:25] Starting 'test'...
 Run phpspec ...
 [12:16:25] Finished 'test' after 67 μs
@@ -110,7 +110,7 @@ gulp.task('test', function() {
 
 In `options`, you can specify whatever command line options you want to run phpspec with,
 e.g. for pretty or verbose output or if you wish to clear the console after every test run.
-With `gulp.src('spec/**/*.php')`, Gulp finds all the PHP files in the `spec/` directory
+With `gulp.src('spec/**/*.php')`, gulp finds all the PHP files in the `spec/` directory
 recursively (using a *glob* pattern) and then pipes them into the `phpspec` command with
 the options from above using `pipe(phpspec('./bin/phpspec run', options))`. You may need
 to adjust the path to the `phpspec` executable. Now, when running `gulp test` in your
@@ -120,7 +120,7 @@ plugin gets called and shows a nice desktop notification – depending on your o
 
 To implement a *watch* functionality that is monitoring files for changes and then
 automatically runs the `test` task, we implement another task called `watch`, which
-makes use of a native Gulp feature to watch for file changes:
+makes use of a native gulp feature to watch for file changes:
 
 {% highlight javascript %}
 gulp.task('watch', function() {
@@ -131,7 +131,7 @@ gulp.task('watch', function() {
 The first parameter of `gulp.watch()` indicates the files we wish to watch for changes,
 i.e. in our case all the PHP source and spec files. The second parameter specifies the
 task(s) to run when a file change is detected, i.e. in our case only the `test` task. Now
-you may start the file watcher with `gulp watch`. But Gulp also allows you to specify
+you may start the file watcher with `gulp watch`. But gulp also allows you to specify
 a `default` task that gets executed whenever you do not provide a task name to the `gulp`
 command:
 
@@ -147,11 +147,11 @@ watcher, there's now nothing more to it than just running:
 $ gulp
 {% endhighlight %}
 
-If we put everything together, we end up with a quite straightforward `Gulpfile.js`
+If we put everything together, we end up with a quite straightforward `gulpfile.js`
 solution, allowing us to watch for file changes and execute the `phpspec` tests:
 
 {% highlight javascript %}
-// Gulpfile.js
+// gulpfile.js
 var gulp = require('gulp');
 var phpspec = require('gulp-phpspec');
 var notify = require('gulp-notify');
@@ -226,9 +226,9 @@ but requires additional work that I'll leave as an exercise to the interested re
 
 # Gulp file watcher vs. PhpStorm file watcher
 
-Although Gulp requires Node.js, I prefer the Gulp solution to the IDE File Watcher because:
+Although gulp requires Node.js, I prefer the gulp solution to the IDE File Watcher because:
 
 * it works in every IDE or even without
-* the Gulpfile can be under version control and easily distributed with a project
+* the `gulpfile.js` can be under version control and easily distributed with a project
 * it provides desktop notifications out-of-the-box
 
