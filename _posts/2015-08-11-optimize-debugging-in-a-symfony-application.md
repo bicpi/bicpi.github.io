@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Readable Debugging of a Symfony application"
+title:  "Optimize Debugging in a Symfony application"
 date:   2015-08-11 14:11:58
-categories: php xdebug debugging
+categories: php xdebug debugging symfony
 ---
 
 When debugging a Symfony application with Xdebug you might not only want to step through
