@@ -133,7 +133,5 @@ Symfony code:
 
 Happy debugging!
 
-<!--
-If you want learn more about initializing Xdebug debugging session, check out my blog post
-about [Connecting Xdebug to PhpStorm](http:// ...)
--->
+*If you want learn more about initializing Xdebug debugging session, check out my blog post
+about [Connecting Xdebug to PhpStorm](http://www.sessiondigital.de/blog/connecting-xdebug-to-phpstorm).*
