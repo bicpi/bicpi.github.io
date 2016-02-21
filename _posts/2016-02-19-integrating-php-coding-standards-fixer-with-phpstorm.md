@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Integrating PHP Coding Standards Fixer with PhpStorm"
-date: 2016-02-21 14:56:17
+date: 2016-02-19 14:56:17
 ---
 
 Fixing coding standard issue individually is very tedious, e.g after running a static code analysis tool

@@ -1,8 +1,7 @@
 ---
 layout: post
-title:  "Hidden Gem: Using Doctrine Naming Strategies in Symfony"
-date:   2015-12-20 23:05:17
-categories: php doctrine database symfony sql
+title:  "Using Doctrine Naming Strategies in Symfony"
+date:   2016-02-20 22:05:17
 ---
 
 Frequently, I'm stumbling upon very verbose Doctrine metadata definitions that translate each and every

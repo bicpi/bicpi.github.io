@@ -5,7 +5,6 @@ date: 2015-08-11 14:11:58
 redirect_from: /php/xdebug/debugging/symfony/2015/08/11/optimize-debugging-in-a-symfony-application/
 ---
 
-
 When debugging a Symfony application with Xdebug you might not only want to step through
 your own custom code, but also through the Symfony code itself. As a lot of Symfony's core
 code is aggregated and optimized into a single file at `app/bootstrap.php.cache` for performance
