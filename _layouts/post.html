@@ -8,6 +8,23 @@ layout: default
     {{ content }}
 
     <p>&nbsp;</p>
+    <div style="font-size: 80%">
+        <p>
+            <img class="img-rounded" style="width: 90px;margin-right: 10px;float:left;" src="{{ site.baseurl }}/images/avatar-small.jpg">
+
+            <strong>Philipp Rieber</strong> is a passionate and certified PHP and Symfony developer
+            working at <a href="http://www.paymill.com/">Paymill</a> in Munich, Germany.
+            He is also engaged in the frontend, the Cloud, on Mobile, as a DevOp and a technical writer.
+            He is never missing the <a href="http://www.meetup.com/phpugmunich/">PHP User Group Munich</a>
+            and he is co-organizing the <a href="http://www.meetup.com/sfugmunich/">Symfony User Group Munich</a>.
+        </p>
+        <p>
+            <i class="fa fa-home"></i> <a href="http://philipp-rieber.net">philipp-rieber.net</a><br>
+            <a class="twitter-follow-button" data-show-count="false" href="https://twitter.com/bicpi">Follow @bicpi</a>
+        </p>
+    </div>
+
+    <p>&nbsp;</p>
     <p><i>Liked this post? Follow me on <a href="https://twitter.com/bicpi" target="_blank">Twitter</a> for updates.</i></p>
 </div>
 
@@ -32,19 +49,4 @@ layout: default
     })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'bicpi';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
 {% endif %}
