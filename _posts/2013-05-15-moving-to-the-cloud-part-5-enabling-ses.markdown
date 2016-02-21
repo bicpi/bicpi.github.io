@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Moving to the cloud part 5: Enabling SES"
-date:   2013-05-15 06:22:36
-categories: cloud aws ses email swiftmailer
+title: "Moving to the cloud part 5: Enabling SES"
+date: 2013-05-15 06:22:36
+redirect_from: /cloud/aws/ses/email/swiftmailer/2013/05/15/moving-to-the-cloud-part-5-enabling-ses/
 ---
 
 Sending emails from a Symfony2 application is no challenging task. Just configure

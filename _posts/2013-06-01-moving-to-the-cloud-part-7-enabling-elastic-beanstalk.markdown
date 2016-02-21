@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Moving to the cloud part 7: Enabling Elastic Beanstalk"
-date:   2013-06-01 08:19:56
-categories: cloud aws
+title: "Moving to the cloud part 7: Enabling Elastic Beanstalk"
+date: 2013-06-01 08:19:56
+redirect_from: /cloud/aws/2013/06/01/moving-to-the-cloud-part-7-enabling-elastic-beanstalk/
 ---
 
 Finally, after preparing our application during the

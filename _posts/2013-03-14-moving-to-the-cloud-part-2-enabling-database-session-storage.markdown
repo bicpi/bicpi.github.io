@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Moving to the cloud part 2: Enabling database session storage"
-date:   2013-03-14 21:13:06
-categories: cloud aws database mysql
+title: "Moving to the cloud part 2: Enabling database session storage"
+date: 2013-03-14 21:13:06
+redirect_from: /cloud/aws/database/mysql/2013/03/14/moving-to-the-cloud-part-2-enabling-database-session-storage/
 ---
 
 By default, PHP persists every user session to a single file stored in the

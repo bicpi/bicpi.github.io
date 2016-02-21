@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Moving to the cloud part 4: Enabling S3"
-date:   2013-05-11 23:54:37
-categories: cloud aws s3
+title: "Moving to the cloud part 4: Enabling S3"
+date: 2013-05-11 23:54:37
+redirect_from: /cloud/aws/s3/2013/05/12/moving-to-the-cloud-part-4-enabling-s3/
 ---
 
 Moving to the cloud mostly means moving to a scalable multi-server environement

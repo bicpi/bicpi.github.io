@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Moving to the cloud part 1: Intentions"
-date:   2013-03-09 07:27:19
-categories: cloud aws
+title: "Moving to the cloud part 1: Intentions"
+date: 2013-03-09 07:27:19
+redirect_from: /cloud/aws/2013/03/09/moving-to-the-cloud-part-1-intentions/
 ---
 
 Currently, we are moving our first [Symfony2](http://symfony.com/) application to

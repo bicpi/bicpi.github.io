@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Moving to the cloud part 6: Enabling RDS"
-date:   2013-05-19 22:49:44
-categories: cloud aws database mysql rds
+title: "Moving to the cloud part 6: Enabling RDS"
+date: 2013-05-19 22:49:44
+redirect_from: /cloud/aws/database/mysql/rds/2013/05/20/moving-to-the-cloud-part-6-enabling-rds/
 ---
 
 In this part of my series we'll get closer to the fundamentals of our application.

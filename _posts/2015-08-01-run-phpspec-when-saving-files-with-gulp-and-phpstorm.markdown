@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Run phpspec when saving files with gulp and PhpStorm"
-date:   2015-08-01 20:10:19
-categories: phpspec gulp PhpStorm TDD
+title: "Run phpspec when saving files with gulp and PhpStorm"
+date: 2015-08-01 20:10:19
+redirect_from: /phpspec/gulp/phpstorm/tdd/2015/08/01/run-phpspec-when-saving-files-with-gulp-and-phpstorm/
 ---
 
 In our weekly Code Kata at [work](http://www.sessiondigital.de/), we're exercising TDD using

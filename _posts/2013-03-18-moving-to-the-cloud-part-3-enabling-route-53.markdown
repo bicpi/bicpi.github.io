@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Moving to the cloud part 3: Enabling Route 53"
-date:   2013-03-18 08:33:17
-categories: cloud aws route53 dns
+title: "Moving to the cloud part 3: Enabling Route 53"
+date: 2013-03-18 08:33:17
+redirect_from: /cloud/aws/route53/dns/2013/03/18/moving-to-the-cloud-part-3-enabling-route-53/
 ---
 
 This is part 3 of [my series of articles]({% post_url 2013-03-09-moving-to-the-cloud-part-1-intentions %})
