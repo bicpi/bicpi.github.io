@@ -35,15 +35,11 @@ You can also integrate the tool into PhpStorm so that you can apply style fixes 
 
 ![Setting up PHP CS Fixer as an external tool in PhpStorm]({{ site.baseurl }}/assets/php-cs-fixer-in-phpstorm-external-tools.png){: .img-responsive }
 
-**Name**
-`php-cs-fixer`
-**Program**
-`/usr/local/bin/php-cs-fixer`
-**Parameters**
-`--level=symfony --verbose --config=sf23 fix "$FileDir$/$FileName$"`
-**Working directory**
-`$ProjectFileDir$`
- 
+* *Name:* `php-cs-fixer`
+* *Program:* `/usr/local/bin/php-cs-fixer`
+* *Parameters:* `--level=symfony --verbose --config=sf23 fix "$FileDir$/$FileName$"`
+* *Working directory:* `$ProjectFileDir$`
+
 Then navigate to `Preferences > Keymap`, search for `php-cs-fixer` and assign a custom shortcut, e.g. `Ctrl+Alt+P`. Now, when you open up a PHP file in your editor and hit your assigned shortcut, the code gets formatted according to your external tool definition of `php-cs-fixer`.
 
 Another nice feature of the _PHP CS Fixer_ is to add a `.php_cs` file at the project's root to improve the tool's integration by giving sensible default options. This way it'll be quite easy for example to additionally enforce PHP's short array syntax or to give a default list of directories to be analysed.
@@ -52,7 +48,5 @@ Of course, it's should also possible to integrate the _PHP CS Fixer_ into an aut
 
 Fixing code styles might also be possible by using PhpStorm's `Reformat Code` action, and I also use it from time to time to clean things up a bit, but from my experience this tool is a bit greedy and tries to fix things you may not want to be fixed, like chained calls of a fluent interface. Moreover, sharing code style definitions across teams becomes much easier when they are not tied to an IDE and can even be stored within the code repository (`.php_cs` file). On the contrary what's quite useful I think is PhpStorm's `Optimize imports` action which cleans up and orders all the `use` statements – at least since PhpStorm is smart enough to not remove imports that are only used within annotations :-)
 
-**Project website**
-[http://cs.sensiolabs.org/](http://cs.sensiolabs.org/)
-**GitHub repository**
-[https://github.com/FriendsOfPHP/PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+* *Project website:* [http://cs.sensiolabs.org/](http://cs.sensiolabs.org/)
+* *GitHub repository:* [https://github.com/FriendsOfPHP/PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
