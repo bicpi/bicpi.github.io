@@ -12,9 +12,7 @@ process turns out to not be that obvious.
 When wrapping everything within one step, performing a file upload with 
 Guzzle 6 using `multipart/form-data` is as simple as:
 
-{% highlight php %}
-<?php
-
+```php
 use GuzzleHttp\Client;
 
 $client = new Client();
@@ -31,14 +29,14 @@ $response = $client->request(
         ]
     ]
 );
-{% endhighlight %}
+```
 
 But recently I stumbled upon the requirement to create the request object 
 decoupled from actually sending it with the client. Having only a simple 
 string payload in the message body sending as a `POST` request would still
 be quite easy:
 
-{% highlight php %}
+```php
 <?php
 
 use GuzzleHttp\Psr7\Request;
@@ -51,7 +49,7 @@ $request = new Request(
     $payload
 );
 $response = $client->send($request);
-{% endhighlight %}
+```
 
 But how to a create `multipart/form-data` payload? Because files can get huge 
 they need to be fed into the request by a stream. Guzzle provides [a lot of 
@@ -62,7 +60,7 @@ can find it in the supporting
 a `MultipartStream`, the request object can now be created decoupled from the 
 client:
 
-{% highlight php %}
+```php
 <?php
 
 use GuzzleHttp\Psr7\Request;
@@ -82,7 +80,7 @@ $request = new Request(
     $multipart
 );
 $response = $client->send($request);
-{% endhighlight %}
+```
 
 If required, you can now pass around this `$request` object as needed
 before actually sending it with the Guzzle client.
