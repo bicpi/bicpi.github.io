@@ -175,3 +175,7 @@ h6, .h6 {
 a:hover {
     text-decoration: none;
 }
+
+code {
+    word-wrap: break-word;
+}
